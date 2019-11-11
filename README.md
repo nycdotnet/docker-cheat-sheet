@@ -25,3 +25,9 @@ Stop a docker-compose service.
 
 Stop services and delete named volumes and anonymous volumes attached to containers
 `docker-compose down -v`
+
+Delete dangling images (generally safe and may reclaim lots of storage)
+`docker image prune`
+
+Delete images not used by existing containers (don't do unless you can redownload stuff that's not running!!)
+`docker image prune -a`
