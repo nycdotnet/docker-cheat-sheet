@@ -53,7 +53,7 @@ COPY ./*.sql /docker-entrypoint-initdb.d/
 
 I had a `.sql` file in the same directory as the Dockerfile which was then copied into the image in a special place that causes it to be executed by the Postgres container on startup.  This SQL file contained the commands to create a test user and database.
 
-Because I didn't make a new `CMD`, my new container kept the `CMD` of the existing image, so it ran `posgres` on boot.
+Because I didn't make a new `CMD`, my new container kept the `CMD` of the [existing image](https://github.com/docker-library/postgres/blob/0d0485cb02e526f5a240b7740b46c35404aaf13f/10/Dockerfile#L176), so it ran `postgres` on boot.
 
 I ran `docker build .` to build the image.  I then copied the hash of the image from the success message (was `Successfully built 09ec509c3bba`) and was then able to launch the container in daemon mode (allows it to run in the background and returns your console to you).  I also bound localhost port 5432 to port 5432 in the container (to allow connecting to the containerized postgres from my local computer only).  Final command to run:
 
