@@ -40,3 +40,23 @@ Delete dangling images (generally safe and may reclaim lots of storage)
 
 Delete images not used by existing containers (don't do unless you can redownload stuff that's not running!!)
 `docker image prune -a`
+
+## Extending an existing image
+
+I wanted to run Postgres 10.11 using the `postgres:10.11` image, but I also wanted to run some configuration on server startup in order to have a user there for doing local testing.  I created a Dockerfile like this:
+
+```
+FROM postgres:10.11
+
+COPY ./*.sql /docker-entrypoint-initdb.d/
+```
+
+I had a `.sql` file in the same directory as the Dockerfile which was then copied into the image in a special place that causes it to be executed by the Postgres container on startup.  This SQL file contained the commands to create a test user and database.
+
+I ran `docker build .` to build the image.  I then copied the hash of the image from the success message (was `Successfully built 09ec509c3bba`) and ran this to launch the container in daemon mode (allows it to run in the background and returns your console to you) and also with binding localhost port 5432 to port 5432 in the container (to allow connecting to the containerized postgres from my local computer only).  Final command to run:
+
+```
+docker run -p 127.0.0.1:5432:5432 -d 09ec509c3bba
+```
+
+You can see the container running via `docker ps` which will show the port mapping.
