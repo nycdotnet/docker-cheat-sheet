@@ -17,7 +17,7 @@ You can build the `Dockerfile` in the current directory with `docker build .`.  
 
 Once you've built a Linux-based `Dockerfile`, you can run bash inside it using the image hash (will be shown at the end of each successful step in the build such as `Successfully built 8ecf61de9be9`).  The command is typically `docker run -it <image> bash`, though bash may be `bin/bash` or even something else, depending on the setup of the image.  If the `Dockerfile` has an `ENTRYPOINT` step, you may have to specify bash as an entrypoint instead: `docker run -it --entrypoint /bin/bash <image>`
 
-If you run `docker ps` to get teh container ID, you can run `docker exec -it <containerid> /bin/bash` .
+If you run `docker ps` to get the container ID, you can run `docker exec -it <containerid> /bin/bash` .
 
 If your container is running in Kubernetes, the command is `<kubectlalias> exec [--namespace <namespaceName>] -it <pod_name> -- /bin/bash`
 
@@ -35,7 +35,7 @@ Stop a docker-compose service.
 Stop services and delete named volumes and anonymous volumes attached to containers
 `docker-compose down -v`
 
-Delete dangling images (generally safe and may reclaim lots of storage)
+Delete dangling images (generally safe, and may reclaim lots of storage)
 `docker image prune`
 
 Delete images not used by existing containers (don't do unless you can redownload stuff that's not running!!)
@@ -53,10 +53,10 @@ COPY ./*.sql /docker-entrypoint-initdb.d/
 
 I had a `.sql` file in the same directory as the Dockerfile which was then copied into the image in a special place that causes it to be executed by the Postgres container on startup.  This SQL file contained the commands to create a test user and database.
 
-I ran `docker build .` to build the image.  I then copied the hash of the image from the success message (was `Successfully built 09ec509c3bba`) and ran this to launch the container in daemon mode (allows it to run in the background and returns your console to you) and also with binding localhost port 5432 to port 5432 in the container (to allow connecting to the containerized postgres from my local computer only).  Final command to run:
+I ran `docker build .` to build the image.  I then copied the hash of the image from the success message (was `Successfully built 09ec509c3bba`) and was then able to launch the container in daemon mode (allows it to run in the background and returns your console to you).  I also bound localhost port 5432 to port 5432 in the container (to allow connecting to the containerized postgres from my local computer only).  Final command to run:
 
 ```
 docker run -p 127.0.0.1:5432:5432 -d 09ec509c3bba
 ```
 
-You can see the container running via `docker ps` which will show the port mapping.
+You can see the container running via `docker ps`, which will also show the port mapping.  You can also see the port mappings alone via `docker port <container id>`
