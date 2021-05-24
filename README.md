@@ -65,10 +65,18 @@ You can see the container running via `docker ps`, which will also show the port
 
 ## Windows containers
 
-Example Windows 10 Dockerfile (for Windows 10, 2020 H2):
+Example Windows 10 Dockerfile (for Windows 10, 2020 H2) that installs Chocolatey and kubectl - (note the two different examples of RUN syntax):
 
 ```
 FROM mcr.microsoft.com/windows:20H2
+
+RUN ["powershell", \
+    "Set-ExecutionPolicy Bypass -Scope Process -Force;", \
+    "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;", \
+    "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"]
+
+RUN choco install kubernetes-cli --no-progress --yes
+
 CMD ["cmd", "/c", "dir"]
 ```
 
