@@ -62,3 +62,14 @@ docker run -p 127.0.0.1:5432:5432 -d 09ec509c3bba
 ```
 
 You can see the container running via `docker ps`, which will also show the port mapping.  You can also see the port mappings alone via `docker port <container id>`
+
+## Windows containers
+
+Example Windows 10 Dockerfile (for Windows 10, 2020 H2):
+
+```
+FROM mcr.microsoft.com/windows:20H2
+CMD ["cmd", "/c", "dir"]
+```
+
+Build with `docker build .` just like with Linux.  Once built, `docker run <image>` to run as a script, or `docker run -it <image> cmd.exe` to run interactively.
