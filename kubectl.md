@@ -1,6 +1,8 @@
 Kubectl Cheat Sheet
 ===================
 
+`kubectl version -o json` lists the version of kubectl you have installed and the version of the kubernetes cluster if you're connected.
+
 `kubectl get pods`  lists all pods in default namespace.
 `kubectl get pods --namespace foo`  lists all pods in namespace `foo`.
 
