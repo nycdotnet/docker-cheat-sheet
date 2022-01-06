@@ -1,5 +1,8 @@
 Kubectl Cheat Sheet
 ===================
+I know kubectl is not docker.  I don't care.  :-)
+
+Official cheat sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 `kubectl version -o json` lists the version of kubectl you have installed and the version of the kubernetes cluster if you're connected.
 
