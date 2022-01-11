@@ -10,6 +10,7 @@ Official cheat sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 `kubectl get pods --namespace foo`  lists all pods in namespace `foo`.
 
 `kubectl get deployment` lists all deployments in default namespace
+
 `kubectl describe deployment bar` describes deployment `bar` in the default namespace (stuff typically in the deployment.yml such as labels, annotations, images, resource request/limits, etc.)
 
 `kubectl scale deployments/myservice --replicas 3` scales the `myservice` deployment to 3 replicas (this could be up or down)
