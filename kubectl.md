@@ -15,6 +15,10 @@ Official cheat sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 `kubectl scale deployments/myservice --replicas 3` scales the `myservice` deployment to 3 replicas (this could be up or down)
 
+`kubectl rollout restart deployment/myservice` deletes and restarts all pods in the existing deployment for myservice
+`kubectl rollout status deployment/myservice` checks the current status of the rollout for myservice
+`kubectl rollout history deployment/myservice` lists known revisions of the deployment of myservice
+
 `kubectl get secret` lists all secrets in default namespace  (the number in the third column is the count of secret key value pairs in the file)
 `kubectl edit secret foo` edits the secret named `foo` in the default namespace using the default text editor.
 
