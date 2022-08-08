@@ -13,6 +13,33 @@ CMD ["node","app/myapp.js"]
 
 You can build the `Dockerfile` in the current directory with `docker build .`.  If you need to pull a newer version of the images (specified as part of `FROM`), you can use `--pull` as in `docker build . --pull`, otherwise the images will be cached.  This is usually required when using a floating tag such as `latest`.
 
+## Running a pulled image
+
+You can pull down an image from Dockerhub or another registry using a command like: `docker pull redis` or `docker pull jaegertracing/all-in-one`.  Once you have pulled down an image, you can list the images available with `docker images`.  These images can be run using the values of the `REPOSITORY`, `TAG`, and `IMAGE ID` fields in the output.  Consider this example output of `docker images`:
+
+```
+REPOSITORY                                            TAG              IMAGE ID       CREATED         SIZE
+redis                                                 latest           3e42dd4e79c7   6 days ago      117MB
+redis                                                 <none>           53aa81e8adfa   2 months ago    117MB
+postgres                                              11               60a93af0bba5   6 weeks ago     284MB
+jaegertracing/all-in-one                              latest           b4407f47570d   4 weeks ago     60.4MB
+jaegertracing/all-in-one                              <none>           5dc67a620878   2 months ago    60.3MB
+jaegertracing/all-in-one                              <none>           115e9ce6a360   6 months ago    57.5MB
+```
+
+You could run the latest redis locally by repository name with the command `docker run redis` or `docker run redis:latest`.  The `latest` tag is implied if omitted when using a name.  If you wanted to run the older version of redis (from "2 months ago" in the above output), you can use the image id instead: `docker run 53aa81e8adfa`.
+
+## Tagging an image
+
+If you want to refer to a particular image id by a custom tag, you can use `docker tag` command.  For example, if I wanted to refer to the version of redis from "2 months ago" in the above listing of `docker images` as the `old` tag, I could do that by running this command using its image id: `docker tag 53aa81e8adfa redis:old`.  Then I could run it as `docker run redis:old`, and when I run `docker images`, it would be shown like this in the output:
+
+```
+REPOSITORY                                            TAG              IMAGE ID       CREATED         SIZE
+redis                                                 old              53aa81e8adfa   2 months ago    117MB
+```
+
+See the [docker tag](https://docs.docker.com/engine/reference/commandline/tag/) documentation for more details.
+
 ## Running a container interactively
 
 Once you've built a Linux-based `Dockerfile`, you can run bash inside it using the image hash (will be shown at the end of each successful step in the build such as `Successfully built 8ecf61de9be9`).  The command is typically `docker run -it <image> bash`, though bash may be `bin/bash` or even something else, depending on the setup of the image.  If the `Dockerfile` has an `ENTRYPOINT` step, you may have to specify bash as an entrypoint instead: `docker run -it --entrypoint /bin/bash <image>`
