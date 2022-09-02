@@ -11,7 +11,7 @@ COPY ./myapp.js /app/
 CMD ["node","app/myapp.js"]
 ```
 
-You can build the `Dockerfile` in the current directory with `docker build .`.  If you need to pull a newer version of the images (specified as part of `FROM`), you can use `--pull` as in `docker build . --pull`, otherwise the images will be cached.  This is usually required when using a floating tag such as `latest`.
+You can build the `Dockerfile` in the current directory with `docker build .`.  If you need to pull a newer version of the images (specified as part of `FROM`), you can use `--pull` as in `docker build . --pull`, otherwise the images will be cached.  This is usually required when using a floating tag such as `latest`.  To specify a `Dockerfile` other than the default use `-f` such as `docker build -f some-other.dockerfile .`
 
 ## Running a pulled image
 
