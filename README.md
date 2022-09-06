@@ -40,6 +40,10 @@ redis                                                 old              53aa81e8a
 
 See the [docker tag](https://docs.docker.com/engine/reference/commandline/tag/) documentation for more details.
 
+### Environment variables
+
+You can pass environment variables to a container that you launch with docker run via `-e` such as `docker run -e SOME_VAR=FOO`.  If you don't put the `=` then the value of your local environment variable will be passed into the container.  There is also support for env files.  See https://docs.docker.com/engine/reference/commandline/run for more details.
+
 ## Running a container interactively
 
 Once you've built a Linux-based `Dockerfile`, you can run bash inside it using the image hash (will be shown at the end of each successful step in the build such as `Successfully built 8ecf61de9be9`).  The command is typically `docker run -it <image> bash`, though bash may be `bin/bash` or even something else, depending on the setup of the image.  If the `Dockerfile` has an `ENTRYPOINT` step, you may have to specify bash as an entrypoint instead: `docker run -it --entrypoint /bin/bash <image>`
