@@ -44,6 +44,10 @@ See the [docker tag](https://docs.docker.com/engine/reference/commandline/tag/) 
 
 You can pass environment variables to a container that you launch with docker run via `-e` such as `docker run -e SOME_VAR=FOO`.  If you don't put the `=` then the value of your local environment variable will be passed into the container.  There is also support for env files.  See https://docs.docker.com/engine/reference/commandline/run for more details.
 
+### Ports
+
+You can expose ports in a container to the host OS.  For example `docker run -p 127.0.0.1:5432:5432/tcp` will expose port 5432 in the container to port 5432 on 127.0.0.1 of the host OS.  The "local" port is first and the port as it exists in the container is second.
+
 ## Running a container interactively
 
 Once you've built a Linux-based `Dockerfile`, you can run bash inside it using the image hash (will be shown at the end of each successful step in the build such as `Successfully built 8ecf61de9be9`).  The command is typically `docker run -it <image> bash`, though bash may be `bin/bash` or even something else, depending on the setup of the image.  If the `Dockerfile` has an `ENTRYPOINT` step, you may have to specify bash as an entrypoint instead: `docker run -it --entrypoint /bin/bash <image>`
