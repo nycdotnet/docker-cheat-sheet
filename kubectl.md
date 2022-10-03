@@ -32,4 +32,7 @@ Official cheat sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 `kubectl apply -f mymanifest.yml` applies the manifest in the specified yaml file, such as a secret, configmap, etc.
 
+### Performance
+
+`kubectl describe PodMetrics <pod_name> --namespace foo` gives CPU and memory usage
 
