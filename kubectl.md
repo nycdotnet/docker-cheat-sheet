@@ -34,8 +34,16 @@ Official cheat sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 ### Performance
 
-kint describe PodMetrics employment-converter --namespace applications
+`kubectl describe PodMetrics employment-converter --namespace applications`
 
 `kubectl describe PodMetrics <pod_partial_name_starts_with> --namespace foo` gives CPU and memory usage plus a bunch of other data such as labels and annotations.  Nice because it will do search based on the pod partial name starting with what you specifiy - you don't have to give a specific exact pod name.  Gives current CPU utilization in the ridiculous "nanoCPU" unit.
 
 `kubectl top <pod_name> --namespace foo --containers` gives CPU and memory usage for the exact pod name you provide, broken out into which container.
+
+### Port forwarding
+
+Kubectl supports forwarding a local port to an active pod.  If you want to forward traffic sent to port 3000 locally to port 4000 on a pod called `my-pod-aaaaaaaaa-bbbbb` in namespace `foo`, you can run this command:
+
+`kubectl port-forward --namespace foo my-pod-aaaaaaaaa-bbbbb 3000:4000`
+
+The instance of kubectl will forward that port on both IP v4 and IP v6 and run until cancelled.
