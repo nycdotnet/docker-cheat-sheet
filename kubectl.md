@@ -36,7 +36,7 @@ Official cheat sheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 `kubectl describe PodMetrics <pod_partial_name_starts_with> --namespace foo` gives CPU and memory usage plus a bunch of other data such as labels and annotations.  Nice because it will do search based on the pod partial name starting with what you specifiy - you don't have to give a specific exact pod name.  Gives current CPU utilization in the ridiculous "nanoCPU" unit.
 
-`kubectl top <pod_name> --namespace foo --containers` gives CPU and memory usage for the exact pod name you provide, broken out into which container.
+`kubectl top pod <pod_name> --namespace foo --containers` gives CPU and memory usage for the exact pod name you provide, broken out into which container.  If you don't specify a pod name, it will return all the pods so you can grep for the pattern you want, or use `-l labelname=labelvalue` to filter by label.
 
 ### Port forwarding
 
