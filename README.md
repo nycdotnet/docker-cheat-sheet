@@ -116,3 +116,9 @@ CMD ["cmd", "/c", "dir"]
 ```
 
 Build with `docker build .` just like with Linux.  Once built, `docker run <image>` to run as a script, or `docker run -it <image> cmd.exe` to run interactively.
+
+## Miscellanea
+
+To limit the memory that a particular container will use, `docker build` and `docker run` both take a `-m` switch, such as `-m 2GB`.
+
+To set up a volume mapped between your computer and the container, you can use `-v localpath:containerpath`.  For a Windows container, this might be `-v c:/path/on/my/computer:c:/path/in/container`.
