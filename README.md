@@ -13,6 +13,14 @@ CMD ["node","app/myapp.js"]
 
 You can build the `Dockerfile` in the current directory with `docker build .`.  If you need to pull a newer version of the images (specified as part of `FROM`), you can use `--pull` as in `docker build . --pull`, otherwise the images will be cached.  This is usually required when using a floating tag such as `latest`.  To specify a `Dockerfile` other than the default use `-f` such as `docker build -f some-other.dockerfile .`
 
+### Build arguments
+
+You can pass build arguments using the `--build-arg` switch like this:
+
+```
+docker build --build-arg MY_ARG_NAME=MY_VALUE --build-arg OTHER_ARG_NAME=OTHER_VALUE .
+```
+
 ## Running a pulled image
 
 You can pull down an image from Dockerhub or another registry using a command like: `docker pull redis` or `docker pull jaegertracing/all-in-one`.  Once you have pulled down an image, you can list the images available with `docker images`.  These images can be run using the values of the `REPOSITORY`, `TAG`, and `IMAGE ID` fields in the output.  Consider this example output of `docker images`:
