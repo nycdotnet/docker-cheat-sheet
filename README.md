@@ -64,6 +64,8 @@ If you run `docker ps` to get the container ID, you can run `docker exec -it <co
 
 If your container is running in Kubernetes, the command is `<kubectlalias> exec [--namespace <namespaceName>] -it <pod_name> -- /bin/bash`
 
+If your container is part of a docker-compose file, you can instead run `docker compose exec <servicename> <command>`
+
 ## Docker compose
 
 Launch a docker-compose service in daemon mode (non-interactive)
