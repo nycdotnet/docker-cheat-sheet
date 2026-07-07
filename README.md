@@ -21,6 +21,19 @@ You can pass build arguments using the `--build-arg` switch like this:
 docker build --build-arg MY_ARG_NAME=MY_VALUE --build-arg OTHER_ARG_NAME=OTHER_VALUE .
 ```
 
+There is not a way to configure environment variables at build time - there are just build args.  However, you can assign an env var to a build arg value in your Dockerfile and they are allowed to have the same name.  Example with variable `NODE_ENV`:
+
+```dockerfile
+ARG MYVAR=foo
+ENV MYVAR=$MYVAR
+```
+
+```bash
+# by default, MYVAR is `foo` based on the Dockerfile, but this would override
+# it and ensure the env var in the container is `bar` instead.
+docker build --build-arg MYVAR=bar .
+```
+
 ## Running a pulled image
 
 You can pull down an image from Dockerhub or another registry using a command like: `docker pull redis` or `docker pull jaegertracing/all-in-one`.  Once you have pulled down an image, you can list the images available with `docker images`.  These images can be run using the values of the `REPOSITORY`, `TAG`, and `IMAGE ID` fields in the output.  Consider this example output of `docker images`:
